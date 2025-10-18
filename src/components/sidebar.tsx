@@ -12,9 +12,18 @@ export function Sidebar() {
   const router = useRouter();
   const { user, userRole, isAdmin, signOut } = useAuth();
   const [isAmbjentetExpanded, setIsAmbjentetExpanded] = useState(false);
-  const searchParams = useSearchParams()
-  const currentGrupi = searchParams?.get('grupi')
-  const currentType = searchParams?.get('type')
+  
+  let currentGrupi: string | null = null;
+  let currentType: string | null = null;
+  
+  try {
+    const searchParams = useSearchParams();
+    currentGrupi = searchParams?.get('grupi') || null;
+    currentType = searchParams?.get('type') || null;
+  } catch {
+    // useSearchParams not available during build
+  }
+  
   const [ambjenteteExpanded, setAmbjenteteExpanded] = useState(
     currentGrupi === 'MAGAZINA' || currentGrupi === 'DYQANE' || currentGrupi === 'HOTELI'
   )

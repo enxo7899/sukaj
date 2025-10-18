@@ -179,6 +179,7 @@ export async function getPaymentHistory(filters?: {
   grupi?: string;
   shkalla?: string;
 }) {
+  const supabase = await createClient();
   let query = supabase
     .from('rental_payments')
     .select('*')

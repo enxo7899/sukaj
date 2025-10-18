@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { LoginForm } from './login-form';
 
 export default function LoginPage() {
@@ -13,7 +14,9 @@ export default function LoginPage() {
           <h2 className="text-2xl font-semibold text-white mb-6 text-center">
             Identifikohu
           </h2>
-          <LoginForm />
+          <Suspense fallback={<div className="text-white text-center">Duke u ngarkuar...</div>}>
+            <LoginForm />
+          </Suspense>
         </div>
 
         <p className="text-center text-slate-400 text-sm mt-6">
