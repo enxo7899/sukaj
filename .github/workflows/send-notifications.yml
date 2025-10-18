@@ -1,0 +1,22 @@
+# GitHub Actions Cron Job - Alternative to Vercel Cron
+# Runs every day at 8:00 AM UTC (9:00 AM Albania time)
+
+name: Send Rent Notifications
+
+on:
+  schedule:
+    # Runs at 8:00 AM UTC every day
+    - cron: '0 8 * * *'
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  send-notifications:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Send notification request
+        run: |
+          curl -X GET "${{ secrets.APP_URL }}/api/cron/send-notifications" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            -H "Content-Type: application/json"
