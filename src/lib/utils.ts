@@ -19,16 +19,20 @@ export function formatCurrency(amount: number | null | undefined, currency: stri
   return `${symbol}${amount.toLocaleString('en-US')}`;
 }
 
-// Format date in Albanian format (DD.MM.YYYY)
+// Format date in Albanian format (e.g., "1 Tetor 2025")
 export function formatAlbanianDate(date: string | null | undefined): string {
   if (!date) return '-';
   
   try {
     const d = new Date(date);
-    const day = String(d.getDate()).padStart(2, '0');
-    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = d.getDate(); // No padding, just 1, 2, 3... 31
+    const monthNames = [
+      'Janar', 'Shkurt', 'Mars', 'Prill', 'Maj', 'Qershor',
+      'Korrik', 'Gusht', 'Shtator', 'Tetor', 'Nëntor', 'Dhjetor'
+    ];
+    const month = monthNames[d.getMonth()];
     const year = d.getFullYear();
-    return `${day}.${month}.${year}`;
+    return `${day} ${month} ${year}`;
   } catch {
     return '-';
   }
