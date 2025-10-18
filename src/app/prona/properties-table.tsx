@@ -132,6 +132,7 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
             <TableHeader>
               <TableRow>
                 <TableHead className="min-w-[150px]">Emërtimi</TableHead>
+                <TableHead className="min-w-[120px]">Status</TableHead>
                 <TableHead className="min-w-[180px]">Grupi</TableHead>
                 <TableHead className="min-w-[80px]">Shkalla</TableHead>
                 <TableHead className="min-w-[150px]">Qiraxhiu</TableHead>
@@ -140,7 +141,6 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
                 <TableHead className="min-w-[100px]">UKT</TableHead>
                 <TableHead className="min-w-[120px]">Qera mujore</TableHead>
                 <TableHead>Data e qirasë</TableHead>
-                <TableHead>Status</TableHead>
                 <TableHead className="text-right">Veprime</TableHead>
               </TableRow>
             </TableHeader>
@@ -148,32 +148,6 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
               {filteredProperties.map((property) => (
                 <TableRow key={property.id}>
                   <TableCell className="font-medium">{property.emertimi}</TableCell>
-                  <TableCell>
-                    {property.grupi && (
-                      <Badge variant="outline" className="text-xs">
-                        {property.grupi}
-                      </Badge>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    {property.shkalla && (
-                      <Badge variant="secondary" className="text-xs">
-                        {property.shkalla}
-                      </Badge>
-                    )}
-                  </TableCell>
-                  <TableCell>{property.emri_qiraxhiut || '-'}</TableCell>
-                  <TableCell className="text-xs">{property.tel_qiraxhiut || '-'}</TableCell>
-                  <TableCell className="text-xs">{property.oshee || '-'}</TableCell>
-                  <TableCell className="text-xs">{property.ukt || '-'}</TableCell>
-                  <TableCell>
-                    {property.qera_mujore
-                      ? formatCurrency(property.qera_mujore, property.monedha || 'EUR')
-                      : '-'}
-                  </TableCell>
-                  <TableCell className="text-sm">
-                    {formatAlbanianDate(property.data_qirase)}
-                  </TableCell>
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -201,6 +175,32 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
+                  </TableCell>
+                  <TableCell>
+                    {property.grupi && (
+                      <Badge variant="outline" className="text-xs">
+                        {property.grupi}
+                      </Badge>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {property.shkalla && (
+                      <Badge variant="secondary" className="text-xs">
+                        {property.shkalla}
+                      </Badge>
+                    )}
+                  </TableCell>
+                  <TableCell>{property.emri_qiraxhiut || '-'}</TableCell>
+                  <TableCell className="text-xs">{property.tel_qiraxhiut || '-'}</TableCell>
+                  <TableCell className="text-xs">{property.oshee || '-'}</TableCell>
+                  <TableCell className="text-xs">{property.ukt || '-'}</TableCell>
+                  <TableCell>
+                    {property.qera_mujore
+                      ? formatCurrency(property.qera_mujore, property.monedha || 'EUR')
+                      : '-'}
+                  </TableCell>
+                  <TableCell className="text-sm">
+                    {formatAlbanianDate(property.data_qirase)}
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex items-center justify-end gap-2">
