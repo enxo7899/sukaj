@@ -20,17 +20,17 @@ export default async function PronaPage({
   return (
     <div className="flex flex-col h-full">
       <div className="border-b bg-card/50 backdrop-blur">
-        <div className="container mx-auto px-6 py-4">
-          <h1 className="text-2xl font-bold">
+        <div className="px-4 md:px-6 py-4">
+          <h1 className="text-xl md:text-2xl font-bold">
             {getTitle()}
           </h1>
-          <p className="text-sm text-muted-foreground mt-1">
+          <p className="text-xs md:text-sm text-muted-foreground mt-1">
             {properties.length} {properties.length === 1 ? 'pronë' : 'prona'}
           </p>
         </div>
       </div>
       
-      <div className="flex-1 container mx-auto px-6 py-6 overflow-auto">
+      <div className="flex-1 px-2 md:px-6 py-4 md:py-6 overflow-auto">
         <Suspense fallback={<TableSkeleton />}>
           <PropertiesTable initialData={properties} searchParams={params} />
         </Suspense>

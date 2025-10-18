@@ -97,20 +97,21 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between gap-4">
-        <div className="relative flex-1 max-w-sm">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
+        <div className="relative flex-1 max-w-full sm:max-w-sm">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
-            placeholder="Kërko sipas emërtimit ose qiraxhiut..."
+            placeholder="Kërko..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-10"
+            className="pl-10 h-10"
           />
         </div>
         {isAdmin && (
-          <Button onClick={handleAdd}>
+          <Button onClick={handleAdd} className="w-full sm:w-auto h-10">
             <Plus className="mr-2 h-4 w-4" />
-            Shto pronë
+            <span className="hidden sm:inline">Shto pronë</span>
+            <span className="sm:hidden">Shto</span>
           </Button>
         )}
       </div>
@@ -125,18 +126,19 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
           </p>
         </div>
       ) : (
-        <div className="rounded-lg border bg-card">
-          <Table>
+        <div className="rounded-lg border bg-card overflow-hidden">
+          <div className="overflow-x-auto">
+            <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Emërtimi</TableHead>
-                <TableHead>Grupi</TableHead>
-                <TableHead>Shkalla</TableHead>
-                <TableHead>Qiraxhiu</TableHead>
-                <TableHead>Tel.</TableHead>
-                <TableHead>OSHEE</TableHead>
-                <TableHead>UKT</TableHead>
-                <TableHead>Qera mujore</TableHead>
+                <TableHead className="min-w-[150px]">Emërtimi</TableHead>
+                <TableHead className="min-w-[180px]">Grupi</TableHead>
+                <TableHead className="min-w-[80px]">Shkalla</TableHead>
+                <TableHead className="min-w-[150px]">Qiraxhiu</TableHead>
+                <TableHead className="min-w-[120px]">Tel.</TableHead>
+                <TableHead className="min-w-[100px]">OSHEE</TableHead>
+                <TableHead className="min-w-[100px]">UKT</TableHead>
+                <TableHead className="min-w-[120px]">Qera mujore</TableHead>
                 <TableHead>Data e qirasë</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-right">Veprime</TableHead>
@@ -231,6 +233,7 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
               ))}
             </TableBody>
           </Table>
+          </div>
         </div>
       )}
 

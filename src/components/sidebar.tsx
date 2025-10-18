@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 import { useAuth } from '@/contexts/auth-context';
 import { Button } from '@/components/ui/button';
 
-export function Sidebar() {
+export function Sidebar({ onNavigate }: { onNavigate?: () => void } = {}) {
   const pathname = usePathname();
   const router = useRouter();
   const { user, userRole, isAdmin, signOut } = useAuth();
@@ -29,7 +29,8 @@ export function Sidebar() {
   )
 
   const handleNavigation = (href: string) => {
-    router.push(href)
+    router.push(href);
+    onNavigate?.(); // Close mobile menu
   }
 
   const handleSignOut = async () => {

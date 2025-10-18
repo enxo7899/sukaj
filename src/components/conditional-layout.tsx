@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { Sidebar } from './sidebar';
+import { MobileSidebar } from './mobile-sidebar';
 
 export function ConditionalLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -13,8 +13,8 @@ export function ConditionalLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex h-screen bg-background">
-      <Sidebar />
-      <main className="flex-1 overflow-auto">
+      <MobileSidebar />
+      <main className="flex-1 overflow-auto pt-14 lg:pt-0">
         {children}
       </main>
     </div>
