@@ -96,19 +96,19 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
     : properties;
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
-        <div className="relative flex-1 max-w-full sm:max-w-sm">
+    <div className="space-y-6">
+      <div className="flex flex-col items-stretch justify-between gap-4 rounded-2xl border border-border/15 bg-card/30 px-4 py-5 shadow-[0_25px_65px_-45px_rgba(15,110,207,0.65)] backdrop-blur-xl sm:flex-row sm:items-center sm:gap-5">
+        <div className="relative flex-1 max-w-full sm:max-w-md">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             placeholder="Kërko..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-10 h-10"
+            className="h-11 pl-11"
           />
         </div>
         {isAdmin && (
-          <Button onClick={handleAdd} className="w-full sm:w-auto h-10">
+          <Button onClick={handleAdd} className="h-11 w-full sm:w-auto">
             <Plus className="mr-2 h-4 w-4" />
             <span className="hidden sm:inline">Shto pronë</span>
             <span className="sm:hidden">Shto</span>
@@ -126,7 +126,7 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
           </p>
         </div>
       ) : (
-        <div className="rounded-lg border bg-card overflow-hidden">
+        <div className="rounded-3xl border border-border/10 bg-card/20 backdrop-blur-xl">
           <div className="overflow-x-auto">
             <Table>
             <TableHeader>
@@ -152,8 +152,8 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Badge
-                          variant={property.status === 'Paguar' ? 'default' : 'destructive'}
-                          className="cursor-pointer"
+                          variant={property.status === 'Paguar' ? 'success' : 'destructive'}
+                          className="cursor-pointer shadow-none"
                         >
                           {property.status}
                         </Badge>
@@ -178,14 +178,14 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
                   </TableCell>
                   <TableCell>
                     {property.grupi && (
-                      <Badge variant="outline" className="text-xs">
+                      <Badge variant="outline" className="text-[10px]">
                         {property.grupi}
                       </Badge>
                     )}
                   </TableCell>
                   <TableCell>
                     {property.shkalla && (
-                      <Badge variant="secondary" className="text-xs">
+                      <Badge variant="secondary" className="text-[10px]">
                         {property.shkalla}
                       </Badge>
                     )}

@@ -46,15 +46,15 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void } = {}) {
   }
 
   return (
-    <aside className="w-64 border-r bg-card/50 backdrop-blur flex flex-col">
-      <div className="p-6 border-b">
-        <h2 className="text-xl font-bold">🏢 Sukaj Prona</h2>
-        <p className="text-sm text-muted-foreground">Menaxhim pronash</p>
+    <aside className="flex h-full min-h-screen w-64 flex-col overflow-hidden border-r border-border/15 bg-[radial-gradient(circle_at_top_left,hsla(199,65%,18%,0.45),transparent_60%)] bg-secondary/70 backdrop-blur-xl">
+      <div className="space-y-1 border-b border-border/10 px-6 py-7">
+        <h2 className="text-xl font-semibold tracking-tight text-foreground">🏢 Sukaj Prona</h2>
+        <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground/70">Menaxhim pronash</p>
       </div>
       
       {/* User info */}
       {user && userRole && (
-        <div className="px-6 py-4 border-b bg-accent/30">
+        <div className="border-b border-border/10 bg-accent/20 px-6 py-4">
           <div className="flex items-center gap-2 text-sm">
             <User className="h-4 w-4" />
             <div className="flex-1 min-w-0">
@@ -66,15 +66,15 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void } = {}) {
           </div>
         </div>
       )}
-      <nav className="flex-1 space-y-1 px-3 py-4 overflow-y-auto">
+      <nav className="flex-1 space-y-2 overflow-y-auto px-4 py-6">
         {/* Kreu */}
         <button
           onClick={() => handleNavigation("/")}
           className={cn(
-            "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-accent text-left",
+            "group flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium tracking-tight transition-colors duration-200 text-left",
             isActiveRoute("/")
-              ? "bg-accent text-accent-foreground"
-              : "text-muted-foreground hover:text-accent-foreground"
+              ? "bg-accent/80 text-accent-foreground shadow-lg shadow-black/10"
+              : "text-muted-foreground hover:bg-accent/40 hover:text-accent-foreground"
           )}
         >
           <Home className="h-4 w-4" />
@@ -85,10 +85,10 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void } = {}) {
         <button
           onClick={() => handleNavigation("/prona?type=apartamente")}
           className={cn(
-            "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-accent text-left",
+            "group flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium tracking-tight transition-colors duration-200 text-left",
             isActiveRoute("/prona", "apartamente")
-              ? "bg-accent text-accent-foreground"
-              : "text-muted-foreground hover:text-accent-foreground"
+              ? "bg-accent/80 text-accent-foreground shadow-lg shadow-black/10"
+              : "text-muted-foreground hover:bg-accent/40 hover:text-accent-foreground"
           )}
         >
           <Building className="h-4 w-4" />
@@ -96,14 +96,14 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void } = {}) {
         </button>
 
         {/* Individual apartment categories */}
-        <div className="pl-4 space-y-1">
+        <div className="space-y-1 pl-5">
           <button
             onClick={() => handleNavigation("/prona?grupi=6%20KATESHI%20I%20BARDHË")}
             className={cn(
-              "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-accent text-left",
+              "group flex w-full items-center gap-3 rounded-lg px-3 py-2 text-xs font-medium uppercase tracking-[0.2em] transition-colors duration-200 text-left",
               isActiveRoute("/prona", undefined, "6 KATESHI I BARDHË")
-                ? "bg-accent text-accent-foreground"
-                : "text-muted-foreground hover:text-accent-foreground"
+                ? "bg-accent/80 text-accent-foreground shadow-lg shadow-black/10"
+                : "text-muted-foreground/70 hover:bg-accent/40 hover:text-accent-foreground"
             )}
           >
             <Layers className="h-4 w-4" />
@@ -113,10 +113,10 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void } = {}) {
           <button
             onClick={() => handleNavigation("/prona?grupi=Shkalla%20A%2BB")}
             className={cn(
-              "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-accent text-left",
+              "group flex w-full items-center gap-3 rounded-lg px-3 py-2 text-xs font-medium uppercase tracking-[0.2em] transition-colors duration-200 text-left",
               isActiveRoute("/prona", undefined, "Shkalla A+B")
-                ? "bg-accent text-accent-foreground"
-                : "text-muted-foreground hover:text-accent-foreground"
+                ? "bg-accent/80 text-accent-foreground shadow-lg shadow-black/10"
+                : "text-muted-foreground/70 hover:bg-accent/40 hover:text-accent-foreground"
             )}
           >
             <Layers className="h-4 w-4" />
@@ -126,10 +126,10 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void } = {}) {
           <button
             onClick={() => handleNavigation("/prona?grupi=Shkalla%20D")}
             className={cn(
-              "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-accent text-left",
+              "group flex w-full items-center gap-3 rounded-lg px-3 py-2 text-xs font-medium uppercase tracking-[0.2em] transition-colors duration-200 text-left",
               isActiveRoute("/prona", undefined, "Shkalla D")
-                ? "bg-accent text-accent-foreground"
-                : "text-muted-foreground hover:text-accent-foreground"
+                ? "bg-accent/80 text-accent-foreground shadow-lg shadow-black/10"
+                : "text-muted-foreground/70 hover:bg-accent/40 hover:text-accent-foreground"
             )}
           >
             <Layers className="h-4 w-4" />
@@ -142,8 +142,7 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void } = {}) {
           <button
             onClick={() => setAmbjenteteExpanded(!ambjenteteExpanded)}
             className={cn(
-              "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-accent text-left",
-              "text-muted-foreground hover:text-accent-foreground"
+              "group flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium tracking-tight transition-colors duration-200 text-left text-muted-foreground hover:bg-accent/40 hover:text-accent-foreground"
             )}
           >
             {ambjenteteExpanded ? (
@@ -156,14 +155,14 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void } = {}) {
           </button>
 
           {ambjenteteExpanded && (
-            <div className="pl-4 space-y-1 mt-1">
+            <div className="mt-1 space-y-1 pl-5">
               <button
                 onClick={() => handleNavigation("/prona?grupi=MAGAZINA")}
                 className={cn(
-                  "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-accent text-left",
+                  "group flex w-full items-center gap-3 rounded-lg px-3 py-2 text-xs font-medium uppercase tracking-[0.2em] transition-colors duration-200 text-left",
                   isActiveRoute("/prona", undefined, "MAGAZINA")
-                    ? "bg-accent text-accent-foreground"
-                    : "text-muted-foreground hover:text-accent-foreground"
+                    ? "bg-accent/80 text-accent-foreground shadow-lg shadow-black/10"
+                    : "text-muted-foreground/70 hover:bg-accent/40 hover:text-accent-foreground"
                 )}
               >
                 <Warehouse className="h-4 w-4" />
@@ -173,10 +172,10 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void } = {}) {
               <button
                 onClick={() => handleNavigation("/prona?grupi=DYQANE")}
                 className={cn(
-                  "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-accent text-left",
+                  "group flex w-full items-center gap-3 rounded-lg px-3 py-2 text-xs font-medium uppercase tracking-[0.2em] transition-colors duration-200 text-left",
                   isActiveRoute("/prona", undefined, "DYQANE")
-                    ? "bg-accent text-accent-foreground"
-                    : "text-muted-foreground hover:text-accent-foreground"
+                    ? "bg-accent/80 text-accent-foreground shadow-lg shadow-black/10"
+                    : "text-muted-foreground/70 hover:bg-accent/40 hover:text-accent-foreground"
                 )}
               >
                 <Store className="h-4 w-4" />
@@ -186,10 +185,10 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void } = {}) {
               <button
                 onClick={() => handleNavigation("/prona?grupi=HOTELI")}
                 className={cn(
-                  "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-accent text-left",
+                  "group flex w-full items-center gap-3 rounded-lg px-3 py-2 text-xs font-medium uppercase tracking-[0.2em] transition-colors duration-200 text-left",
                   isActiveRoute("/prona", undefined, "HOTELI")
-                    ? "bg-accent text-accent-foreground"
-                    : "text-muted-foreground hover:text-accent-foreground"
+                    ? "bg-accent/80 text-accent-foreground shadow-lg shadow-black/10"
+                    : "text-muted-foreground/70 hover:bg-accent/40 hover:text-accent-foreground"
                 )}
               >
                 <Hotel className="h-4 w-4" />
@@ -203,10 +202,10 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void } = {}) {
         <button
           onClick={() => handleNavigation("/prona")}
           className={cn(
-            "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-accent text-left",
+            "group flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium tracking-tight transition-colors duration-200 text-left",
             pathname === "/prona" && !currentGrupi && !currentType
-              ? "bg-accent text-accent-foreground"
-              : "text-muted-foreground hover:text-accent-foreground"
+              ? "bg-accent/80 text-accent-foreground shadow-lg shadow-black/10"
+              : "text-muted-foreground hover:bg-accent/40 hover:text-accent-foreground"
           )}
         >
           <Building2 className="h-4 w-4" />
@@ -215,10 +214,10 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void } = {}) {
       </nav>
 
       {/* Logout button at bottom */}
-      <div className="mt-auto p-4 border-t">
+      <div className="mt-auto border-t border-border/10 px-4 py-5">
         <Button
           variant="ghost"
-          className="w-full justify-start text-muted-foreground hover:text-foreground"
+          className="w-full justify-start rounded-xl bg-transparent text-muted-foreground transition-colors hover:bg-accent/40 hover:text-accent-foreground"
           onClick={handleSignOut}
         >
           <LogOut className="mr-2 h-4 w-4" />
