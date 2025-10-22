@@ -135,7 +135,7 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
         </div>
       ) : (
         <div className="rounded-3xl border border-border/15 bg-card/25 shadow-[0_30px_80px_-60px_rgba(15,110,207,0.6)] backdrop-blur-xl">
-          <div className="overflow-x-auto">
+          <div className="max-h-[calc(100vh-260px)] overflow-y-auto overflow-x-auto">
             <Table className="min-w-full">
             <TableHeader>
               <TableRow>
