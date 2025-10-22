@@ -14,7 +14,7 @@ export function ConditionalLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen bg-background">
       <MobileSidebar />
-      <main className="flex-1 overflow-auto pt-14 lg:pt-0">
+      <main className="flex-1 overflow-hidden pt-14 lg:pt-0">
         {children}
       </main>
     </div>

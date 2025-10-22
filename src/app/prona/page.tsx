@@ -30,7 +30,7 @@ export default async function PronaPage({
         </div>
       </div>
 
-      <div className="flex-1 overflow-auto px-3 py-6 md:px-10 md:py-8">
+      <div className="flex-1 overflow-hidden px-3 py-6 md:px-10 md:py-8">
         <Suspense fallback={<TableSkeleton />}>
           <PropertiesTable initialData={properties} searchParams={params} />
         </Suspense>
