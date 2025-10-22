@@ -18,19 +18,19 @@ export default async function PronaPage({
   };
 
   return (
-    <div className="flex h-full flex-col gap-6 bg-gradient-to-br from-background via-background/95 to-background/80">
-      <div className="border-b border-border/15 bg-card/30 backdrop-blur-xl">
-        <div className="px-4 md:px-8 py-6">
-          <h1 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+    <div className="flex h-full flex-col gap-6 bg-gradient-to-br from-background/85 via-background/90 to-background/70">
+      <div className="border-b border-border/20 bg-card/35 backdrop-blur-xl">
+        <div className="px-4 md:px-10 py-6">
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground">
             {getTitle()}
           </h1>
-          <p className="mt-1 text-sm text-muted-foreground/80 md:text-base">
+          <p className="mt-2 text-base text-muted-foreground/80">
             {properties.length} {properties.length === 1 ? 'pronë' : 'prona'}
           </p>
         </div>
       </div>
 
-      <div className="flex-1 overflow-auto px-3 py-4 md:px-8 md:py-6">
+      <div className="flex-1 overflow-auto px-3 py-6 md:px-10 md:py-8">
         <Suspense fallback={<TableSkeleton />}>
           <PropertiesTable initialData={properties} searchParams={params} />
         </Suspense>
@@ -42,8 +42,8 @@ export default async function PronaPage({
 function TableSkeleton() {
   return (
     <div className="space-y-5">
-      <Skeleton className="h-12 w-full rounded-xl bg-card/40" />
-      <Skeleton className="h-[400px] w-full rounded-2xl bg-card/30" />
+      <Skeleton className="h-12 w-full rounded-xl bg-card/45" />
+      <Skeleton className="h-[400px] w-full rounded-2xl bg-card/35" />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Property } from '@/types/property';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -87,6 +87,14 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
     }
   };
 
+  useEffect(() => {
+    setProperties(initialData);
+  }, [initialData]);
+
+  useEffect(() => {
+    setSearch(searchParams.q || '');
+  }, [searchParams.q]);
+
   const filteredProperties = search
     ? properties.filter(
         p =>
@@ -97,7 +105,7 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col items-stretch justify-between gap-4 rounded-2xl border border-border/15 bg-card/30 px-4 py-5 shadow-[0_25px_65px_-45px_rgba(15,110,207,0.65)] backdrop-blur-xl sm:flex-row sm:items-center sm:gap-5">
+      <div className="flex flex-col items-stretch justify-between gap-4 rounded-2xl border border-border/20 bg-card/35 px-4 py-5 shadow-[0_25px_50px_-40px_rgba(23,128,217,0.55)] backdrop-blur-xl sm:flex-row sm:items-center sm:gap-5">
         <div className="relative flex-1 max-w-full sm:max-w-md">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
@@ -126,28 +134,28 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
           </p>
         </div>
       ) : (
-        <div className="rounded-3xl border border-border/10 bg-card/20 backdrop-blur-xl">
+        <div className="rounded-3xl border border-border/15 bg-card/25 shadow-[0_30px_80px_-60px_rgba(15,110,207,0.6)] backdrop-blur-xl">
           <div className="overflow-x-auto">
-            <Table>
+            <Table className="min-w-full">
             <TableHeader>
               <TableRow>
-                <TableHead className="min-w-[150px]">Emërtimi</TableHead>
-                <TableHead className="min-w-[120px]">Status</TableHead>
-                <TableHead className="min-w-[180px]">Grupi</TableHead>
-                <TableHead className="min-w-[80px]">Shkalla</TableHead>
-                <TableHead className="min-w-[150px]">Qiraxhiu</TableHead>
-                <TableHead className="min-w-[120px]">Tel.</TableHead>
-                <TableHead className="min-w-[100px]">OSHEE</TableHead>
-                <TableHead className="min-w-[100px]">UKT</TableHead>
-                <TableHead className="min-w-[120px]">Qera mujore</TableHead>
-                <TableHead>Data e qirasë</TableHead>
-                <TableHead className="text-right">Veprime</TableHead>
+                <TableHead className="min-w-[160px]">Emërtimi</TableHead>
+                <TableHead className="min-w-[130px]">Status</TableHead>
+                <TableHead className="min-w-[200px]">Grupi</TableHead>
+                <TableHead className="min-w-[100px]">Shkalla</TableHead>
+                <TableHead className="min-w-[170px]">Qiraxhiu</TableHead>
+                <TableHead className="min-w-[140px]">Tel.</TableHead>
+                <TableHead className="min-w-[120px]">OSHEE</TableHead>
+                <TableHead className="min-w-[120px]">UKT</TableHead>
+                <TableHead className="min-w-[140px]">Qera mujore</TableHead>
+                <TableHead className="min-w-[140px]">Data e qirasë</TableHead>
+                <TableHead className="min-w-[140px] text-right">Veprime</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredProperties.map((property) => (
                 <TableRow key={property.id}>
-                  <TableCell className="font-medium">{property.emertimi}</TableCell>
+                  <TableCell className="font-semibold text-lg tracking-tight text-foreground">{property.emertimi}</TableCell>
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -178,28 +186,28 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
                   </TableCell>
                   <TableCell>
                     {property.grupi && (
-                      <Badge variant="outline" className="text-[10px]">
+                      <Badge variant="outline" className="tracking-[0.1em]">
                         {property.grupi}
                       </Badge>
                     )}
                   </TableCell>
                   <TableCell>
                     {property.shkalla && (
-                      <Badge variant="secondary" className="text-[10px]">
+                      <Badge variant="secondary" className="tracking-[0.1em]">
                         {property.shkalla}
                       </Badge>
                     )}
                   </TableCell>
                   <TableCell>{property.emri_qiraxhiut || '-'}</TableCell>
-                  <TableCell className="text-xs">{property.tel_qiraxhiut || '-'}</TableCell>
-                  <TableCell className="text-xs">{property.oshee || '-'}</TableCell>
-                  <TableCell className="text-xs">{property.ukt || '-'}</TableCell>
+                  <TableCell className="text-sm text-muted-foreground/90">{property.tel_qiraxhiut || '-'}</TableCell>
+                  <TableCell className="text-sm text-muted-foreground/90">{property.oshee || '-'}</TableCell>
+                  <TableCell className="text-sm text-muted-foreground/90">{property.ukt || '-'}</TableCell>
                   <TableCell>
                     {property.qera_mujore
                       ? formatCurrency(property.qera_mujore, property.monedha || 'EUR')
                       : '-'}
                   </TableCell>
-                  <TableCell className="text-sm">
+                  <TableCell className="text-base text-muted-foreground/80">
                     {formatAlbanianDate(property.data_qirase)}
                   </TableCell>
                   <TableCell className="text-right">

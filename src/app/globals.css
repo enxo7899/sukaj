@@ -1,28 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: hsl(222 60% 6%);
-  --color-foreground: hsl(213 32% 96%);
-  --color-card: hsl(223 48% 10%);
-  --color-card-foreground: hsl(210 32% 94%);
-  --color-popover: hsl(223 48% 12%);
-  --color-popover-foreground: hsl(210 32% 94%);
-  --color-primary: hsl(199 88% 58%);
-  --color-primary-foreground: hsl(222 47% 11%);
-  --color-secondary: hsl(228 42% 18%);
-  --color-secondary-foreground: hsl(213 32% 92%);
-  --color-muted: hsl(222 34% 18%);
-  --color-muted-foreground: hsl(216 18% 70%);
-  --color-accent: hsl(214 76% 18%);
-  --color-accent-foreground: hsl(210 40% 96%);
-  --color-destructive: hsl(5 72% 42%);
+  --color-background: hsl(215 45% 22%);
+  --color-foreground: hsl(214 32% 98%);
+  --color-card: hsl(214 42% 32%);
+  --color-card-foreground: hsl(214 32% 97%);
+  --color-popover: hsl(215 44% 34%);
+  --color-popover-foreground: hsl(214 32% 97%);
+  --color-primary: hsl(199 88% 64%);
+  --color-primary-foreground: hsl(216 44% 12%);
+  --color-secondary: hsl(210 38% 42%);
+  --color-secondary-foreground: hsl(214 32% 97%);
+  --color-muted: hsl(214 32% 40%);
+  --color-muted-foreground: hsl(216 22% 82%);
+  --color-accent: hsl(200 72% 42%);
+  --color-accent-foreground: hsl(214 32% 98%);
+  --color-destructive: hsl(5 76% 52%);
   --color-destructive-foreground: hsl(0 0% 100%);
-  --color-border: hsl(220 35% 20%);
-  --color-input: hsl(220 35% 22%);
-  --color-ring: hsl(199 88% 58%);
-  --radius-lg: 0.65rem;
-  --radius-md: calc(0.65rem - 2px);
-  --radius-sm: calc(0.65rem - 4px);
+  --color-border: hsl(214 32% 44%);
+  --color-input: hsl(214 32% 46%);
+  --color-ring: hsl(199 88% 64%);
+  --radius-lg: 0.75rem;
+  --radius-md: calc(0.75rem - 2px);
+  --radius-sm: calc(0.75rem - 4px);
 }
 
 :root,
@@ -32,9 +32,10 @@
 }
 
 body {
-  background: radial-gradient(circle at 18% 18%, hsla(220, 45%, 18%, 0.45) 0%, transparent 55%),
-    radial-gradient(circle at 82% 12%, hsla(199, 72%, 28%, 0.35) 0%, transparent 48%),
-    radial-gradient(circle at 52% 82%, hsla(227, 58%, 22%, 0.35) 0%, transparent 55%),
-    linear-gradient(180deg, hsl(222 60% 6%) 0%, hsl(222 58% 4%) 100%);
+  background: radial-gradient(circle at 18% 18%, hsla(205, 76%, 44%, 0.32) 0%, transparent 55%),
+    radial-gradient(circle at 80% 12%, hsla(197, 85%, 55%, 0.24) 0%, transparent 52%),
+    radial-gradient(circle at 50% 85%, hsla(227, 42%, 38%, 0.3) 0%, transparent 55%),
+    linear-gradient(180deg, hsl(215 45% 23%) 0%, hsl(215 42% 18%) 100%);
   color: var(--color-foreground);
+  font-size: 16px;
 }
