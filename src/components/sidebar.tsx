@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { usePathname, useSearchParams, useRouter } from "next/navigation"
-import { Home, Building2, Layers, ChevronDown, ChevronRight, ChevronLeft, Warehouse, Store, Hotel, Building, LogOut, User } from "lucide-react"
+import { Home, Building2, Layers, ChevronDown, ChevronRight, ChevronLeft, Warehouse, Store, Hotel, Building, LogOut, User, FileText } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from '@/contexts/auth-context';
 import { Button } from '@/components/ui/button';
@@ -233,6 +233,20 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void } = {}) {
         >
           <Building2 className="h-4 w-4" />
           {!collapsed && <span className="truncate">Të gjitha pronat</span>}
+        </button>
+
+        {/* Kontratat */}
+        <button
+          onClick={() => handleNavigation("/kontratat")}
+          className={cn(
+            "group flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium tracking-tight transition-colors duration-200 text-left",
+            pathname === "/kontratat"
+              ? "bg-accent/80 text-accent-foreground shadow-lg shadow-black/10"
+              : "text-muted-foreground hover:bg-accent/40 hover:text-accent-foreground"
+          )}
+        >
+          <FileText className="h-4 w-4" />
+          {!collapsed && <span className="truncate">Kontratat</span>}
         </button>
       </nav>
 

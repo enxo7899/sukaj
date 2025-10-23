@@ -1,0 +1,27 @@
+INSERT INTO public.kontratat ("nr_repert", "nr_koleks", "qera_dhenes", "qera_marres", "nr_apartament", "m2", "dyqane", "vendi", "fillimi_kontrates", "mbarimi_kontrates", "vlera_bruto", "monedha_bruto", "vlera_neto", "monedha_neto", "garanci", "monedha_garanci", "kontrate_drita", "kontrate_uji")
+VALUES
+('18588', '8499', 'Ledion Sukaj', 'Adrias Lazaj', 'D23-4-23', NULL, NULL, 'Tirane', '2024-12-01', '2025-11-30', 200, 'EUR', NULL, 'EUR', 200, 'EUR', NULL, 's'),
+('17112', '7857', 'Musli Sukaj', 'Shoqeria Ana 2011', NULL, NULL, 'Supermarket', 'Tirane', '2024-10-31', '2029-10-30', 470600, 'ALL', 400000, 'ALL', NULL, 'ALL', NULL, 's'),
+('3093', '1463', 'Musli Sukaj', 'Shoqeria Sazan Biba', NULL, NULL, 'Hoteli shengjin', 'Shengjin', '2024-04-01', '2025-03-30', 15000, 'EUR', NULL, 'EUR', NULL, 'EUR', NULL, NULL),
+('4859', '2152', 'Musli Sukaj', 'Shoqeria Sazan Biba', NULL, NULL, 'Hoteli shengjin', 'Shengjin', '2025-04-03', '2027-04-02', 27000, 'EUR', NULL, 'EUR', 5000, 'EUR', 'c8860', NULL),
+('860', '383', 'Rovena Sukaj', 'Aviola Papa', 'B26-AP31', NULL, 'B26 251 M2', 'Tirane', '2025-01-01', '2029-12-31', 1411, 'EUR', 1200, 'EUR', NULL, 'EUR', NULL, NULL),
+('1945', '832', 'Musli Sukaj', 'SHOQERIA BOTA DUAS', NULL, 490, 'MAGAZINA E MESIT', 'Tirane', '2025-03-01', '2030-02-28', NULL, 'EUR', 2550, 'EUR', 5100, 'EUR', NULL, NULL),
+('1438', '655', 'Musli Sukaj', 'Shoqeria AFM DISTRIBUTION', NULL, 870, 'KATI DYTE MAGAZINA', 'TIRane', '2025-02-01', '2026-01-30', 4036, 'EUR', 3430, 'EUR', 6860, 'EUR', NULL, NULL),
+('2387', '1023', 'Musli Sukaj', 'Shoqeria N.D Albania (Sonila Ylli)', NULL, NULL, NULL, 'Tirane', '2025-02-01', '2027-01-31', 7085, 'EUR', 6020, 'EUR', 12040, 'EUR', NULL, NULL),
+('1651', '734', 'Musli Sukaj', 'Ardit Gjini (Ina Mese)', NULL, 528, 'Magazina Mbrapa', 'Tirane', '2025-02-01', '2027-01-30', 2353, 'EUR', 2000, 'EUR', 2, 'EUR', NULL, NULL),
+('19097', '8753', 'Musli Sukaj', 'Shoqeria Miranda Kaca', NULL, 464, 'Palestra', 'Tirane', '2024-10-01', '2028-05-02', 1765, 'EUR', 1500, 'EUR', 2, 'EUR', NULL, NULL),
+('1562', '701', 'Musli Sukaj', 'Ilertisa Deda', NULL, 67.9, 'kurse gjemanishte k2', 'Tirane', '2024-11-01', '2025-10-31', 23530, 'ALL', 20000, 'ALL', NULL, 'ALL', NULL, NULL),
+('5983', '2949', 'Musli Sukaj', 'Fitim Aliu-Nexhmie Aliu-Lorete Aliu-Lend Aliu', 'A1', 73.1, NULL, 'Tirane', '2023-02-10', '2026-02-10', 235, 'EUR', NULL, 'EUR', NULL, 'EUR', NULL, NULL),
+('19098', '8754', 'Ledion Sukaj', 'Mateo Mino', '4-30', 47.09, NULL, 'Tirane', '2024-12-01', '2025-05-01', 23530, 'ALL', NULL, 'ALL', NULL, 'ALL', NULL, NULL),
+('18588', '8499', 'Ledion Sukaj', 'Adriaz Lazaj', 'Ap.23', 62.56, NULL, 'Tirane', '2024-12-01', '2025-11-30', 200, 'EUR', NULL, 'EUR', 1, 'EUR', NULL, NULL),
+('19448', '8927', 'Musli Sukaj', 'Arjan Cengu', 'D29', 69.49, NULL, 'Tirane', '2024-12-19', '2025-05-20', 15, 'ALL', NULL, 'ALL', NULL, 'ALL', NULL, NULL),
+('18718', '8577', 'Ledion Sukaj', 'Ambrozia Meta', '4-28', 69, 'D31', 'Tirane', '2024-12-01', '2025-11-30', 500, 'EUR', 1, 'EUR', NULL, 'EUR', NULL, NULL),
+('19528', '8967', 'Ledion Sukaj', 'Faik Dervishi', '4-29', 71.67, 'D32', 'Tirane', '2024-12-01', '2025-11-30', 500, 'EUR', NULL, 'EUR', NULL, 'EUR', NULL, NULL),
+('19360', '8879', 'Rovena Sukaj', 'Nertila Haxhia', '2-1', 60.75, 'B1', 'Tirane', '2024-12-01', '2025-11-30', 41200, 'ALL', 35000, 'ALL', NULL, 'ALL', NULL, NULL),
+('15961', '7516', 'Musli Sukaj', 'Shoqeria Symbol', NULL, 1348, 'Magazina kati 4', 'Tirane', '2024-07-01', '2026-06-30', 5576, 'EUR', NULL, 'EUR', 9480, 'EUR', NULL, NULL),
+('8779', '4290', 'Musli Sukaj', 'Shoqeria Urim Hoxha', NULL, 270, 'Lavazhi', 'Tirane', '2024-04-01', '2025-08-30', 20000, 'ALL', NULL, 'ALL', NULL, 'ALL', NULL, NULL),
+('18147', '8362', 'Musli Sukaj', 'Shoqeria Lux Moda Market', 'B16b', 39.52, NULL, 'Tirane', '2024-11-14', '2027-11-13', 34200, 'ALL', NULL, 'ALL', NULL, 'ALL', NULL, NULL),
+('3962', '1836', 'Musli Sukaj', 'Fitim Aliu', 'A1', 81.6, NULL, 'Tirane', '2023-02-10', '2026-02-10', 23500, 'ALL', NULL, 'ALL', NULL, 'ALL', NULL, NULL),
+('1063', '478', 'Musli Sukaj', 'Jurgen Halilaj', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'EUR', NULL, 'EUR', NULL, 'EUR', NULL, 's')
+ON CONFLICT (nr_repert, nr_koleks) DO UPDATE SET
+"nr_repert" = EXCLUDED."nr_repert", "nr_koleks" = EXCLUDED."nr_koleks", "qera_dhenes" = EXCLUDED."qera_dhenes", "qera_marres" = EXCLUDED."qera_marres", "nr_apartament" = EXCLUDED."nr_apartament", "m2" = EXCLUDED."m2", "dyqane" = EXCLUDED."dyqane", "vendi" = EXCLUDED."vendi", "fillimi_kontrates" = EXCLUDED."fillimi_kontrates", "mbarimi_kontrates" = EXCLUDED."mbarimi_kontrates", "vlera_bruto" = EXCLUDED."vlera_bruto", "monedha_bruto" = EXCLUDED."monedha_bruto", "vlera_neto" = EXCLUDED."vlera_neto", "monedha_neto" = EXCLUDED."monedha_neto", "garanci" = EXCLUDED."garanci", "monedha_garanci" = EXCLUDED."monedha_garanci", "kontrate_drita" = EXCLUDED."kontrate_drita", "kontrate_uji" = EXCLUDED."kontrate_uji";
