@@ -1,22 +1,51 @@
-# GitHub Actions Cron Job - Alternative to Vercel Cron
-# Runs every day at 8:00 AM UTC (9:00 AM Albania time)
+# GitHub Actions Cron Job - Rent Processing & SMS Notifications
+# Runs every day at 5:00 AM UTC (6:00 AM Albania time)
 
-name: Send Rent Notifications
+name: Process Rent & Send Notifications
 
 on:
   schedule:
-    # Runs at 8:00 AM UTC every day
-    - cron: '0 8 * * *'
+    # Runs at 5:00 AM UTC every day
+    - cron: '0 5 * * *'
   # Allow manual trigger
   workflow_dispatch:
 
 jobs:
-  send-notifications:
+  process-rent:
     runs-on: ubuntu-latest
+    name: Process Rent Due & Send SMS
     
     steps:
-      - name: Send notification request
+      - name: Step 1 - Process Rent Due (Save History & Reset Status)
         run: |
-          curl -X GET "${{ secrets.APP_URL }}/api/cron/send-notifications" \
+          echo "Processing rent due properties..."
+          RESPONSE=$(curl -s -X GET "${{ secrets.APP_URL }}/api/cron/process-rent-due" \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-            -H "Content-Type: application/json"
+            -H "Content-Type: application/json")
+          
+          echo "Response: $RESPONSE"
+          
+          # Check if successful
+          if echo "$RESPONSE" | jq -e '.success == true' > /dev/null; then
+            echo "✅ Rent processing successful"
+          else
+            echo "❌ Rent processing failed"
+            exit 1
+          fi
+      
+      - name: Step 2 - Send SMS Notifications
+        run: |
+          echo "Sending SMS notifications..."
+          RESPONSE=$(curl -s -X GET "${{ secrets.APP_URL }}/api/sms/rent-due" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            -H "Content-Type: application/json")
+          
+          echo "Response: $RESPONSE"
+          
+          # Check if successful
+          if echo "$RESPONSE" | jq -e '.success == true' > /dev/null; then
+            echo "✅ SMS notifications sent successfully"
+          else
+            echo "❌ SMS notifications failed"
+            exit 1
+          fi

@@ -42,6 +42,7 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
   const { isAdmin } = useAuth();
   const [properties, setProperties] = useState(initialData);
   const [search, setSearch] = useState(searchParams.q || '');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'Paguar' | 'Pa Paguar'>('all');
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingProperty, setEditingProperty] = useState<Property | null>(null);
 
@@ -95,25 +96,69 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
     setSearch(searchParams.q || '');
   }, [searchParams.q]);
 
-  const filteredProperties = search
-    ? properties.filter(
-        p =>
+  const filteredProperties = properties
+    .filter(
+      p =>
+        (search === '' ||
           p.emertimi.toLowerCase().includes(search.toLowerCase()) ||
-          p.emri_qiraxhiut?.toLowerCase().includes(search.toLowerCase())
-      )
-    : properties;
+          p.emri_qiraxhiut?.toLowerCase().includes(search.toLowerCase())) &&
+        (statusFilter === 'all' || p.status === statusFilter)
+    )
+    // Sort by status: Paguar first when filtering by Paguar, Pa Paguar first otherwise
+    .sort((a, b) => {
+      if (statusFilter === 'Paguar') {
+        // When filtering by Paguar, show Paguar first
+        if (a.status === 'Paguar' && b.status !== 'Paguar') return -1;
+        if (a.status !== 'Paguar' && b.status === 'Paguar') return 1;
+      } else if (statusFilter === 'Pa Paguar') {
+        // When filtering by Pa Paguar, show Pa Paguar first
+        if (a.status === 'Pa Paguar' && b.status !== 'Pa Paguar') return -1;
+        if (a.status !== 'Pa Paguar' && b.status === 'Pa Paguar') return 1;
+      } else {
+        // When showing all, show Pa Paguar first (unpaid need attention)
+        if (a.status === 'Pa Paguar' && b.status !== 'Pa Paguar') return -1;
+        if (a.status !== 'Pa Paguar' && b.status === 'Pa Paguar') return 1;
+      }
+      // Secondary sort by property name
+      return a.emertimi.localeCompare(b.emertimi, 'sq');
+    });
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col items-stretch justify-between gap-4 rounded-2xl border border-border/20 bg-card/35 px-4 py-5 shadow-[0_25px_50px_-40px_rgba(23,128,217,0.55)] backdrop-blur-xl sm:flex-row sm:items-center sm:gap-5">
-        <div className="relative flex-1 max-w-full sm:max-w-md">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <Input
-            placeholder="Kërko..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="h-11 pl-11"
-          />
+        <div className="flex flex-col sm:flex-row gap-3 flex-1">
+          <div className="relative flex-1 max-w-full sm:max-w-md">
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              placeholder="Kërko..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="h-11 pl-11"
+            />
+          </div>
+          <Select
+            value={statusFilter}
+            onValueChange={(value: 'all' | 'Paguar' | 'Pa Paguar') => setStatusFilter(value)}
+          >
+            <SelectTrigger className="h-11 w-full sm:w-[180px]">
+              <SelectValue placeholder="Filtro sipas statusit" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Të gjitha</SelectItem>
+              <SelectItem value="Pa Paguar">
+                <span className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-red-500" />
+                  Pa Paguar
+                </span>
+              </SelectItem>
+              <SelectItem value="Paguar">
+                <span className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-green-600" />
+                  Paguar
+                </span>
+              </SelectItem>
+            </SelectContent>
+          </Select>
         </div>
         {isAdmin && (
           <Button onClick={handleAdd} className="h-11 w-full sm:w-auto">

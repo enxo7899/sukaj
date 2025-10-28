@@ -1,8 +1,12 @@
 {
   "crons": [
     {
-      "path": "/api/cron/send-notifications",
-      "schedule": "0 8 * * *"
+      "path": "/api/cron/process-rent-due",
+      "schedule": "40 19 * * *"
+    },
+    {
+      "path": "/api/sms/rent-due",
+      "schedule": "41 19 * * *"
     }
   ]
 }
