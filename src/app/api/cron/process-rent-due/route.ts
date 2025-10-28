@@ -86,9 +86,8 @@ export async function GET(request: NextRequest) {
     console.log(`   ⚠️  Unpaid last month: ${result.total_unpaid_last_month}`);
 
     return NextResponse.json({
-      success: true,
-      message: 'Rent due processing complete',
       ...result,
+      message: 'Rent due processing complete',
     });
   } catch (error: any) {
     console.error('❌ Error:', error);

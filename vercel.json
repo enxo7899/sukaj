@@ -2,11 +2,11 @@
   "crons": [
     {
       "path": "/api/cron/process-rent-due",
-      "schedule": "40 19 * * *"
+      "schedule": "50 19 * * *"
     },
     {
       "path": "/api/sms/rent-due",
-      "schedule": "41 19 * * *"
+      "schedule": "51 19 * * *"
     }
   ]
 }

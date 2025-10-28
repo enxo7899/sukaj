@@ -112,9 +112,7 @@ async function testTwilioConfig() {
     'TWILIO_ACCOUNT_SID',
     'TWILIO_AUTH_TOKEN',
     'TWILIO_MSG_SERVICE_SID',
-    'TWILIO_WHATSAPP_FROM',
     'ALPHA_SENDER_NAME',
-    'OWNER_PHONE_NUMBER_WHITELIST',
   ];
 
   for (const varName of requiredVars) {
@@ -131,7 +129,6 @@ async function testTwilioConfig() {
     log(`\n✅ Twilio config loaded successfully`, 'green');
     log(`   Account SID: ${config.accountSid.substring(0, 10)}...`, 'blue');
     log(`   Messaging Service: ${config.messagingServiceSid.substring(0, 10)}...`, 'blue');
-    log(`   WhatsApp From: ${config.whatsappFrom}`, 'blue');
     log(`   Alpha Sender: ${config.alphaSenderName}`, 'blue');
     log(`   Use Alpha Sender: ${config.useAlphanumericSender}`, 'blue');
   } catch (error: any) {

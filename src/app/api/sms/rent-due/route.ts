@@ -345,7 +345,7 @@ export async function GET(request: NextRequest) {
 
     // Send one consolidated SMS per owner
     const ownerResults = await Promise.allSettled(
-      Object.entries(propertiesByOwner).map(([ownerPhone, props]) =>
+      (Object.entries(propertiesByOwner) as [string, PropertyDueToday[]][]).map(([ownerPhone, props]) =>
         sendOwnerConsolidatedSms(supabase, ownerPhone, props)
       )
     );
