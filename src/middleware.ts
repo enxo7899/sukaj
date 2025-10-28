@@ -29,6 +29,11 @@ export async function middleware(request: NextRequest) {
     }
   );
 
+  // Skip auth for API routes (cron jobs, SMS)
+  if (request.nextUrl.pathname.startsWith('/api/')) {
+    return supabaseResponse;
+  }
+
   // Refresh session if expired
   const { data: { user } } = await supabase.auth.getUser();
 
