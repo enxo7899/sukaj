@@ -27,7 +27,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Plus, Search, Pencil, Trash2 } from 'lucide-react';
+import { Plus, Search, Pencil, Trash2, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
 import { PropertyDialog } from './property-dialog';
 import { fshiProne, perditesoProne } from './actions';
 import { toast } from 'sonner';
@@ -38,13 +38,35 @@ interface PropertiesTableProps {
   searchParams: { q?: string; grupi?: string; shkalla?: string; type?: string };
 }
 
+type SortField = 'none' | 'status' | 'dueDate' | 'rent';
+type SortOrder = 'asc' | 'desc';
+
 export function PropertiesTable({ initialData, searchParams }: PropertiesTableProps) {
   const { isAdmin } = useAuth();
   const [properties, setProperties] = useState(initialData);
   const [search, setSearch] = useState(searchParams.q || '');
   const [statusFilter, setStatusFilter] = useState<'all' | 'Paguar' | 'Pa Paguar'>('all');
+  const [sortField, setSortField] = useState<SortField>('status');
+  const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingProperty, setEditingProperty] = useState<Property | null>(null);
+
+  const handleSort = (field: SortField) => {
+    if (sortField === field) {
+      // Cycle through: asc → desc → none
+      if (sortOrder === 'asc') {
+        setSortOrder('desc');
+      } else if (sortOrder === 'desc') {
+        // Reset to default sorting
+        setSortField('status');
+        setSortOrder('asc');
+      }
+    } else {
+      // New field, start with ascending
+      setSortField(field);
+      setSortOrder('asc');
+    }
+  };
 
   const handleAdd = () => {
     setEditingProperty(null);
@@ -104,23 +126,38 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
           p.emri_qiraxhiut?.toLowerCase().includes(search.toLowerCase())) &&
         (statusFilter === 'all' || p.status === statusFilter)
     )
-    // Sort by status: Paguar first when filtering by Paguar, Pa Paguar first otherwise
     .sort((a, b) => {
-      if (statusFilter === 'Paguar') {
-        // When filtering by Paguar, show Paguar first
-        if (a.status === 'Paguar' && b.status !== 'Paguar') return -1;
-        if (a.status !== 'Paguar' && b.status === 'Paguar') return 1;
-      } else if (statusFilter === 'Pa Paguar') {
-        // When filtering by Pa Paguar, show Pa Paguar first
-        if (a.status === 'Pa Paguar' && b.status !== 'Pa Paguar') return -1;
-        if (a.status !== 'Pa Paguar' && b.status === 'Pa Paguar') return 1;
-      } else {
-        // When showing all, show Pa Paguar first (unpaid need attention)
-        if (a.status === 'Pa Paguar' && b.status !== 'Pa Paguar') return -1;
-        if (a.status !== 'Pa Paguar' && b.status === 'Pa Paguar') return 1;
+      let comparison = 0;
+
+      // Primary sort by selected field
+      if (sortField === 'status') {
+        // Pa Paguar = 0, Paguar = 1 for ascending (Pa Paguar first)
+        const aVal = a.status === 'Pa Paguar' ? 0 : 1;
+        const bVal = b.status === 'Pa Paguar' ? 0 : 1;
+        comparison = aVal - bVal;
+      } else if (sortField === 'dueDate') {
+        // Sort by due date
+        const aDate = a.data_qirase ? new Date(a.data_qirase).getTime() : 0;
+        const bDate = b.data_qirase ? new Date(b.data_qirase).getTime() : 0;
+        comparison = aDate - bDate;
+      } else if (sortField === 'rent') {
+        // Sort by rent amount
+        const aRent = parseFloat(a.qera_mujore?.toString() || '0');
+        const bRent = parseFloat(b.qera_mujore?.toString() || '0');
+        comparison = aRent - bRent;
       }
+
+      // Apply sort order
+      if (sortOrder === 'desc') {
+        comparison = -comparison;
+      }
+
       // Secondary sort by property name
-      return a.emertimi.localeCompare(b.emertimi, 'sq');
+      if (comparison === 0) {
+        return a.emertimi.localeCompare(b.emertimi, 'sq');
+      }
+
+      return comparison;
     });
 
   return (
@@ -185,15 +222,51 @@ export function PropertiesTable({ initialData, searchParams }: PropertiesTablePr
             <TableHeader>
               <TableRow>
                 <TableHead className="min-w-[160px]">Emërtimi</TableHead>
-                <TableHead className="min-w-[130px]">Status</TableHead>
+                <TableHead className="min-w-[130px]">
+                  <button
+                    onClick={() => handleSort('status')}
+                    className="flex items-center gap-2 hover:text-foreground transition-colors"
+                  >
+                    Status
+                    {sortField === 'status' ? (
+                      sortOrder === 'asc' ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />
+                    ) : (
+                      <ArrowUpDown className="h-4 w-4 opacity-40" />
+                    )}
+                  </button>
+                </TableHead>
                 <TableHead className="min-w-[200px]">Grupi</TableHead>
                 <TableHead className="min-w-[100px]">Shkalla</TableHead>
                 <TableHead className="min-w-[170px]">Qiraxhiu</TableHead>
                 <TableHead className="min-w-[140px]">Tel.</TableHead>
                 <TableHead className="min-w-[120px]">OSHEE</TableHead>
                 <TableHead className="min-w-[120px]">UKT</TableHead>
-                <TableHead className="min-w-[140px]">Qera mujore</TableHead>
-                <TableHead className="min-w-[140px]">Data e qirasë</TableHead>
+                <TableHead className="min-w-[140px]">
+                  <button
+                    onClick={() => handleSort('rent')}
+                    className="flex items-center gap-2 hover:text-foreground transition-colors"
+                  >
+                    Qera mujore
+                    {sortField === 'rent' ? (
+                      sortOrder === 'asc' ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />
+                    ) : (
+                      <ArrowUpDown className="h-4 w-4 opacity-40" />
+                    )}
+                  </button>
+                </TableHead>
+                <TableHead className="min-w-[140px]">
+                  <button
+                    onClick={() => handleSort('dueDate')}
+                    className="flex items-center gap-2 hover:text-foreground transition-colors"
+                  >
+                    Data e qirasë
+                    {sortField === 'dueDate' ? (
+                      sortOrder === 'asc' ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />
+                    ) : (
+                      <ArrowUpDown className="h-4 w-4 opacity-40" />
+                    )}
+                  </button>
+                </TableHead>
                 <TableHead className="min-w-[140px] text-right">Veprime</TableHead>
               </TableRow>
             </TableHeader>
