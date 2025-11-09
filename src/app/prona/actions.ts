@@ -102,11 +102,23 @@ export async function perditesoProne(id: string, input: Partial<Property>, oldSt
   let updateData = { ...input };
   
   if (oldStatus === 'Pa Paguar' && input.status === 'Paguar' && input.data_qirase) {
-    // Move rent date to next month
+    // Move rent date to next month, preserving the day of month
     const currentDate = new Date(input.data_qirase);
-    const nextMonth = new Date(currentDate);
-    nextMonth.setMonth(nextMonth.getMonth() + 1);
-    updateData.data_qirase = nextMonth.toISOString().split('T')[0];
+    const dayOfMonth = currentDate.getDate();
+    const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
+    
+    // Calculate next month and year
+    let nextMonth = currentMonth + 1;
+    let nextYear = currentYear;
+    if (nextMonth > 11) {
+      nextMonth = 0;
+      nextYear += 1;
+    }
+    
+    // Create date with same day in next month
+    const nextDate = new Date(nextYear, nextMonth, dayOfMonth);
+    updateData.data_qirase = nextDate.toISOString().split('T')[0];
   }
 
   // Update property
