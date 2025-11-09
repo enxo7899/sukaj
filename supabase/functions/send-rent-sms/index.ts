@@ -15,18 +15,34 @@ serve(async (req) => {
     const today = new Date().toISOString().split('T')[0]
     const currentDay = new Date().getDate()
 
-    const { data: properties, error } = await supabaseClient
+    // STEP 1: Get ALL properties with a rent due date (regardless of status)
+    const { data: allProperties, error } = await supabaseClient
       .from('properties')
       .select('*')
-      .eq('status', 'Pa Paguar')
       .not('data_qirase', 'is', null)
 
     if (error) throw error
 
-    const filtered = properties?.filter(p => {
+    // STEP 2: Filter properties where due date is today
+    const propertiesDueToday = allProperties?.filter(p => {
       const rentDay = new Date(p.data_qirase).getDate()
       return rentDay === currentDay
     }) || []
+
+    // STEP 3: Auto-reset status to "Pa Paguar" for properties that are marked "Paguar" but due today
+    // This ensures rent automatically becomes unpaid when new month arrives
+    const propertiesToReset = propertiesDueToday.filter(p => p.status === 'Paguar')
+    for (const property of propertiesToReset) {
+      await supabaseClient
+        .from('properties')
+        .update({ status: 'Pa Paguar' })
+        .eq('id', property.id)
+    }
+
+    // STEP 4: Now filter to only "Pa Paguar" properties (includes the ones we just reset)
+    const filtered = propertiesDueToday.filter(p => 
+      p.status === 'Pa Paguar' || propertiesToReset.some(r => r.id === p.id)
+    )
 
     const results = []
     
